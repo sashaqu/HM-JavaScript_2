@@ -83,15 +83,13 @@ console.log(userObj.fullName());
 
 // console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 
- function evenFn(n) {
+function evenFn(n) {
   let arr = [];
-   
-  for(i = 1; i < n;i++)
-    if(i % 2 ===0) 
-      arr.push(i);
-  
+
+  for (let i = 1; i <= n; i++) if (i % 2 === 0) arr.push(i);
+
   return arr;
- }
+}
 
 console.log(evenFn(10)); // [2, 4, 6, 8, 10]
 console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
@@ -224,13 +222,30 @@ console.log(weekFn('2')); // null
 //   return str;
 // }
 
-function ageClassification(n) {
-  
-  n = n < 0 ? 'null' :
-  (n > 0 && n < 24) ? 'детский возраст' : (n >= 24 && n < 44) ? 'молодой возраст' : (n >= 44 && n < 65) ? 'средний возраст' : (n >= 65 && n < 75) ? 'пожилой возраст' :
-  (n >= 75 && n < 90) ? 'старческий возраст' : (n >= 90  && n < 122) ? 'долгожители' : null;
+function ageClassification(num) {
+  // let str;
 
-  return n; 
+  // str = n < 0 ? null : n > 24 ? n > 44 : 'детский возраст'
+  // str = (n < 0) ? null : (n > 0 && n <= 24) ? 'детский возраст' : (n = 24 && n <= 44) ? 'молодой возраст' : (n > 44 && n <= 65) ? 'средний возраст' : (n > 65 && n <= 75) ? 'пожилой  возраст' : (n > 75 && n <= 90) ? 'старческий возраст' : (n > 90  && n <= 122) ? 'долгожители' : null;
+
+  // console.log('str =', str);
+  // return str; 
+
+  return num > 0
+  ? num > 24
+    ? num > 44
+      ? num > 65
+        ? num > 75
+          ? num > 90
+            ? num > 122
+              ? null
+              : 'долгожители'
+            : 'старческий возраст'
+          : 'пожилой возраст'
+        : 'средний возраст'
+      : 'молодой возраст'
+    : 'детский возраст'
+  : null;
 }
 
 console.log('-1 :', ageClassification(-1)); // -1 : null
@@ -242,6 +257,22 @@ console.log('80 :', ageClassification(80)); // 80 : старческий воз�
 console.log('110 :', ageClassification(110)); // 110 : долгожители
 console.log('130 :', ageClassification(130)); // 130 : null
 
+
+console.log(1, ageClassification(-1) === null);
+console.log(2, ageClassification(1) === 'детский возраст');
+console.log(3, ageClassification(24) === 'детский возраст');
+console.log(4, ageClassification(24.01) === 'молодой возраст');
+console.log(5, ageClassification(44) === 'молодой возраст');
+console.log(6, ageClassification(44.01) === 'средний возраст');
+console.log(7, ageClassification(65) === 'средний возраст');
+console.log(8, ageClassification(65.01) === 'пожилой возраст');
+console.log(9, ageClassification(75) === 'пожилой возраст');
+console.log(10, ageClassification(75.01) === 'старческий возраст');
+console.log(11, ageClassification(90) === 'старческий возраст');
+console.log(12, ageClassification(90.01) === 'долгожители');
+console.log(13, ageClassification(122) === 'долгожители');
+console.log(14, ageClassification(122.01) === null);
+console.log(15, ageClassification(150) === null);
 
 /*
  * #7
@@ -354,7 +385,3 @@ console.log(mainFunc(10, 30, cbRandom)); // случайно 10..30 включи
 console.log(mainFunc(2, 5, cbPow)); // 32
 console.log(mainFunc(2, 5, cbAdd)); // 7
 console.log(mainFunc(2, 5, 'not a func')); // false
-
-
-
-
